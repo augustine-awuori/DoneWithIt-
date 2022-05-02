@@ -1,3 +1,4 @@
+
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
@@ -20,10 +21,11 @@ const menuItems = [
       name: "email",
       backgroundColor: colors.secondary,
     },
+    targetScreen: "Messages"
   },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -47,6 +49,7 @@ function AccountScreen(props) {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => navigation.navigate(item.targetScreen)}
             />
           )}
         />
@@ -60,11 +63,11 @@ function AccountScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: colors.light,
-  },
   container: {
     marginVertical: 20,
+  },
+  screen: {
+    backgroundColor: colors.light,
   },
 });
 
