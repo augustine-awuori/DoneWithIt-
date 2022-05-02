@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 
 import {
-  AppForm as Form,
-  AppFormField as FormField,
-  AppFormPicker as Picker,
+  Form,
+  FormField,
+  FormPicker,
   SubmitButton,
 } from '../components/forms'
 import CategoryPickerItem from '../components/CategoryPickerItem'
@@ -29,7 +29,7 @@ const categories = [
   { label: 'Games', value: 5, backgroundColor: '#26de81', icon: 'cards' },
   { label: 'Sports', value: 6, backgroundColor: '#45aaf2', icon: 'basketball' },
   { label: 'Movies & Music', value: 7, backgroundColor: '#4b7bec', icon: 'headphones' },
-]
+];
 
 function ListingEditScreen() {
   const location = useLocation();
@@ -56,7 +56,7 @@ function ListingEditScreen() {
           placeholder="Price"
           width={120}
         />
-        <Picker
+        <FormPicker
           items={categories}
           name="category"
           numberOfColumns={3}
@@ -81,5 +81,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
-})
+});
+
 export default ListingEditScreen
