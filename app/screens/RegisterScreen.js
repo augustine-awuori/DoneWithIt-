@@ -4,8 +4,8 @@ import * as Yup from "yup";
 
 import Screen from "../components/Screen";
 import {
-  AppForm as Form,
-  AppFormField as FormField,
+  Form,
+  FormField,
   SubmitButton,
 } from "../components/forms";
 
