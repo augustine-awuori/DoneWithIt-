@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import FeedScreen from './app/screens/LoginScreen'
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <FeedScreen />
   );
 }
+// <View style={styles.container}>
+//   <Text>Open up App.js to start working on your app!</Text>
+//   <StatusBar style="auto" />
+// </View>
 
 const styles = StyleSheet.create({
   container: {
