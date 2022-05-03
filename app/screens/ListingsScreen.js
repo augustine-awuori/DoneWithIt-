@@ -7,17 +7,22 @@ import Button from '../components/Button'
 import listingsApi from '../api/listings'
 import Screen from '../components/Screen'
 import AppText from '../components/AppText'
+import ActivityIndicator from '../components/ActivityIndicator'
 
 function ListingsScreen({ navigation }) {
   const [listings, setListings] = useState([])
-  const [error, setError] = useState([])
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     loadListings()
   }, [])
 
   const loadListings = async () => {
+    setLoading(true);
     const { data, ok } = await listingsApi.getListings()
+    setLoading(false);
+
     if (!ok) return setError(true)
 
     setError(false)
@@ -32,6 +37,7 @@ function ListingsScreen({ navigation }) {
           <Button title="Retry" onPress={loadListings} />
         </>
       )}
+      <ActivityIndicator visible={loading} />
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
