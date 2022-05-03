@@ -33,7 +33,7 @@ const categories = [
 ];
 
 const handleSubmit = async listing => {
-  const { ok } = await listingsApi.addListing({ ...listing, location });
+  const { ok } = await listingsApi.addListing({ ...listing, location }, progress => console.log(progress));
 
   if (!ok) return alert("Couldn't save the listing.");
 
