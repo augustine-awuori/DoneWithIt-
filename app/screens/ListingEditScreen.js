@@ -10,6 +10,7 @@ import {
 } from '../components/forms'
 import CategoryPickerItem from '../components/CategoryPickerItem'
 import FormImagePicker from '../components/forms/FormImagePicker'
+import listingsApi from '../api/listings'
 import Screen from '../components/Screen'
 import useLocation from '../hooks/useLocation'
 
@@ -31,6 +32,14 @@ const categories = [
   { label: 'Movies & Music', value: 7, backgroundColor: '#4b7bec', icon: 'headphones' },
 ];
 
+const handleSubmit = async listing => {
+  const { ok } = await listingsApi.addListing({ ...listing, location });
+
+  if (!ok) return alert("Couldn't save the listing.");
+
+  alert("Success");
+};
+
 function ListingEditScreen() {
   const location = useLocation();
 
@@ -44,7 +53,7 @@ function ListingEditScreen() {
           category: null,
           images: []
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name='images' />
