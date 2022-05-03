@@ -1,33 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 
+import ActivityIndicator from '../components/ActivityIndicator'
+import AppText from '../components/AppText'
+import Button from '../components/Button'
 import Card from '../components/Card'
 import colors from '../config/colors'
-import Button from '../components/Button'
 import listingsApi from '../api/listings'
 import Screen from '../components/Screen'
-import AppText from '../components/AppText'
-import ActivityIndicator from '../components/ActivityIndicator'
+import useApi from '../hooks/useApi'
 
 function ListingsScreen({ navigation }) {
-  const [listings, setListings] = useState([])
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const { data: listings, error, loading, request: loadListings } = useApi(
+    listingsApi.getListings,
+  );
 
   useEffect(() => {
     loadListings()
   }, [])
-
-  const loadListings = async () => {
-    setLoading(true);
-    const { data, ok } = await listingsApi.getListings()
-    setLoading(false);
-
-    if (!ok) return setError(true)
-
-    setError(false)
-    setListings(data)
-  }
 
   return (
     <Screen style={styles.screen}>
