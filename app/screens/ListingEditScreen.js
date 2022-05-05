@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().label('Description'),
   category: Yup.object().required().nullable().label('Category'),
   images: Yup.array().min(1, 'Please select at least one image.'),
-})
+});
 
 const categories = [
   {
@@ -46,7 +46,7 @@ const categories = [
 function ListingEditScreen() {
   const location = useLocation()
   const [uploadVisible, setUploadVisible] = useState(false)
-  const [progress, setProgress] = useState(false)
+  const [progress, setProgress] = useState()
 
   const handleSubmit = async (listing, { resetForm }) => {
     setProgress(0);
