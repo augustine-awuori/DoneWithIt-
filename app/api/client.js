@@ -2,7 +2,7 @@ import { create } from 'apisauce';
 import cache from '../utility/cache';
 
 const apiClient = create({
-    baseURL: 'http://192.168.139.151:9000/api'
+    baseURL: 'http://192.168.139.130:9000/api'
 });
 
 const get = apiClient.get;
