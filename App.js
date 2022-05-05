@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
-import OfflineNotice from './app/components/OfflineNotice';
+import jwtDecode from 'jwt-decode';
 
 import AppNavigator from './app/navigation/AppNavigator';
-import AuthNavigator from './app/navigation/AuthNavigator';
-import navigationTheme from './app/navigation/navigationTheme';
 import AuthContext from './app/auth/context';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import authStorage from './app/auth/storage';
+import navigationTheme from './app/navigation/navigationTheme';
+import OfflineNotice from './app/components/OfflineNotice';
 
 export default function App() {
   const [user, setUser] = useState();
+
+  const restoreToken = async () => {
+    const token = await authStorage.getToken();
+    if (!token) return;
+    setUser(jwtDecode(token));
+  };
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
@@ -20,12 +31,3 @@ export default function App() {
     </AuthContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
