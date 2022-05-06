@@ -11,6 +11,7 @@ import {
   FormField,
   SubmitButton,
 } from "../components/forms";
+import ActivityIndicator from "../components/ActivityIndicator";
 import authApi from '../api/auth';
 import useAuth from "../auth/useAuth";
 import useApi from '../hooks/useApi';
@@ -23,6 +24,7 @@ const validationSchema = Yup.object().shape({
 
 function RegisterScreen() {
   const registerApi = useApi(userApi.register);
+  const loginApi = useApi(authApi.logIn);
   const [error, setError] = useState();
   const auth = useAuth();
 
@@ -38,12 +40,13 @@ function RegisterScreen() {
       return;
     }
 
-    const { data: authToken } = await authApi.logIn(userInfo.email, userInfo.password);
+    const { data: authToken } = await loginApi.request(userInfo.email, userInfo.password);
     auth.logIn(authToken);
   };
 
   return (
     <Screen style={styles.container}>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Form
         initialValues={{ name: "", email: "", password: "" }}
         onSubmit={handleSubmit}
