@@ -25,6 +25,10 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
+    },
+    "description": "A market place for selling the stuff you don't need.",
+    "notification": {
+      "iosDisplayInForeground": true
     }
   }
 }

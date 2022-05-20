@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
 
 import expoPushTokensApi from '../api/expoPushTokens';
 
@@ -13,7 +12,7 @@ export default useNotifications = (notificationListener) => {
     }, []);
 
     const registerForPushNotifications = async () => {
-        const { granted } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        const { granted } = await Notifications.requestPermissionsAsync();
         if (!granted) return;
 
         try {

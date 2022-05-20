@@ -33,7 +33,7 @@ function AccountScreen({ navigation }) {
       <View style={styles.container}>
         <ListItem
           title={user.name}
-          subTitle={user.username}
+          subTitle={user.email}
           image={require("../assets/mosh.jpg")}
         />
       </View>
